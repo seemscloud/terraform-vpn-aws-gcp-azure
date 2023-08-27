@@ -1,3 +1,4 @@
 /credentials/*.json
 .terraform.lock.hcl
 .terragrunt-cache
+/.idea
