@@ -26,7 +26,7 @@ locals {
 inputs = {
   data = [
     {
-      name          = "bastion"
+      name          = "lorem"
       ip_cidr_range = "10.100.100.0/24"
       network_id    = dependency.compute_network.outputs.compute_network["lorem"]
     }
