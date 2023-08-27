@@ -37,4 +37,10 @@ inputs = {
 
 dependency "compute_network" {
   config_path = "${get_terragrunt_dir()}/../compute-network"
+
+  mock_outputs = {
+    compute_network = {
+      lorem : "mocked"
+    }
+  }
 }

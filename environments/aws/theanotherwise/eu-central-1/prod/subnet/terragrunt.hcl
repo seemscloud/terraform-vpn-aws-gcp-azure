@@ -40,4 +40,10 @@ inputs = {
 
 dependency "vpc" {
   config_path = "${get_terragrunt_dir()}/../vpc"
+
+  mock_outputs = {
+    vpc = {
+      lorem : "mocked"
+    }
+  }
 }
