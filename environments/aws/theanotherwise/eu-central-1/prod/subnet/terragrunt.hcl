@@ -16,7 +16,7 @@ include {
 }
 
 terraform {
-  source = "${get_parent_terragrunt_dir()}/../..//modules/gcp/compute-subnetwork"
+  source = "${get_parent_terragrunt_dir()}/../..//modules/aws/subnet"
 }
 
 locals {
@@ -26,15 +26,18 @@ locals {
 inputs = {
   data = [
     {
-      name          = "bastion"
-      ip_cidr_range = "10.100.100.0/24"
-      network_id    = dependency.compute_network.outputs.compute_network["lorem"]
+      cidr_block        = "10.200.200.0/24"
+      availability_zone = "a"
+      vpc_id            = dependency.vpc.outputs.vpc["lorem"]
+      tags              = {
+        Name = "lorem"
+      }
     }
   ]
 
   tags = local.tags
 }
 
-dependency "compute_network" {
-  config_path = "${get_terragrunt_dir()}/../compute-network"
+dependency "vpc" {
+  config_path = "${get_terragrunt_dir()}/../vpc"
 }
