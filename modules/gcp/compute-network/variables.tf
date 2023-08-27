@@ -1,4 +1,4 @@
-# Defaults
+# Base
 variable "region_name" {
   type = string
 }
@@ -11,8 +11,8 @@ variable "credentials_filename" {
   type = string
 }
 
-# Inputs
-variable "inputs" {
+# Data
+variable "data" {
   type = list(object({
     name                    = string
     auto_create_subnetworks = bool

@@ -1,16 +1,6 @@
-# Defaults
+# Base
 variable "region_name" {
   type = string
-}
-
-# Inputs
-variable "inputs" {
-  type = list(object({
-    cidr_block           = string
-    enable_dns_hostnames = bool
-    enable_dns_support   = bool
-    tags                 = map(string)
-  }))
 }
 
 # Tags
@@ -20,4 +10,14 @@ variable "tags" {
 
 variable "default_tags" {
   type = map(string)
+}
+
+# Data
+variable "data" {
+  type = list(object({
+    cidr_block           = string
+    enable_dns_hostnames = bool
+    enable_dns_support   = bool
+    tags                 = map(string)
+  }))
 }

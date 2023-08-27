@@ -16,17 +16,24 @@ include {
 }
 
 terraform {
-  source = "${get_parent_terragrunt_dir()}/../..//modules/gcp/vpc"
+  source = "${get_parent_terragrunt_dir()}/../..//modules/aws/vpc"
 }
 
 locals {
   tags = {}
-
-  inputs = read_terragrunt_config("inputs.hcl")
 }
 
 inputs = {
-  inputs = local.inputs.inputs.vpc
+  data = [
+    {
+      cidr_block           = "10.200.0.0/16"
+      enable_dns_hostnames = true
+      enable_dns_support   = true
+      tags                 = {
+        Name = "lorem"
+      }
+    }
+  ]
 
   tags = local.tags
 }

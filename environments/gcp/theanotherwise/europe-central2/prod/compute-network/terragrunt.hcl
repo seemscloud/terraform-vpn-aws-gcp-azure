@@ -16,17 +16,21 @@ include {
 }
 
 terraform {
-  source = "${get_parent_terragrunt_dir()}/../..//modules/aws/vpc"
+  source = "${get_parent_terragrunt_dir()}/../..//modules/gcp/compute-network"
 }
 
 locals {
   tags = {}
-
-  inputs = read_terragrunt_config("inputs.hcl")
 }
 
 inputs = {
-  inputs = local.inputs.inputs.vpc
+  data = [
+    {
+      name                    = "lorem"
+      auto_create_subnetworks = false
+      mtu                     = 1460
+    }
+  ]
 
   tags = local.tags
 }
