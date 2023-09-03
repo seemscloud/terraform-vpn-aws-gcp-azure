@@ -27,11 +27,11 @@ resource "aws_default_network_acl" "default_network_acl" {
 
   default_network_acl_id = aws_vpc.vpc[count.index].default_network_acl_id
 
-  tags = merge(var.tags, var.default_tags, var.data[count.index].tags)
-
   lifecycle {
     ignore_changes = [subnet_ids]
   }
+
+  tags = merge(var.tags, var.default_tags, var.data[count.index].tags)
 
   depends_on = [
     aws_vpc.vpc
@@ -39,8 +39,7 @@ resource "aws_default_network_acl" "default_network_acl" {
 }
 
 resource "aws_default_security_group" "default_security_group" {
-  count = length(var.data)
-
+  count  = length(var.data)
   vpc_id = aws_vpc.vpc[count.index].id
 
   tags = merge(var.tags, var.default_tags, var.data[count.index].tags)
@@ -61,8 +60,7 @@ resource "aws_default_vpc_dhcp_options" default_vpc_dhcp_options {
 }
 
 resource "aws_vpc_dhcp_options_association" "default_vpc_dhcp_options" {
-  count = length(var.data)
-
+  count           = length(var.data)
   vpc_id          = aws_vpc.vpc[count.index].id
   dhcp_options_id = aws_default_vpc_dhcp_options.default_vpc_dhcp_options[count.index].id
 

@@ -16,7 +16,7 @@ include {
 }
 
 terraform {
-  source = "${get_parent_terragrunt_dir()}/../..//modules/aws/vpc"
+  source = "${get_parent_terragrunt_dir()}/../..//modules/aws/internet-gateway"
 }
 
 locals {
@@ -26,15 +26,22 @@ locals {
 inputs = {
   data = [
     {
-      cidr_block           = "10.200.0.0/16"
-      enable_dns_hostnames = true
-      enable_dns_support   = true
-      create_igw           = true
-      tags                 = {
-        Name = "lorem"
+      vpc_id = dependency.vpc.outputs.vpc["lorem"]
+      tags   = {
+        Name = "lorem-internet-gateway"
       }
     }
   ]
 
   tags = local.tags
+}
+
+dependency "vpc" {
+  config_path = "${get_terragrunt_dir()}/../vpc"
+
+  mock_outputs = {
+    vpc = {
+      lorem : "mocked"
+    }
+  }
 }
