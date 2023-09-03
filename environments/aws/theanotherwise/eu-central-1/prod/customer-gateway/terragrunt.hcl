@@ -50,7 +50,7 @@ dependency "ha_vpn_gateway" {
 
   mock_outputs = {
     ha_vpn_gateway = {
-      lorem : "mocked"
+      lorem = "x"
     }
   }
 }
