@@ -14,9 +14,9 @@ variable "credentials_filename" {
 # Data
 variable "data" {
   type = list(object({
-    name       = string
-    stack_type = string
-    network_id = string
+    name            = string
+    redundancy_type = string
+    interfaces      = list(string)
   }))
 }
 
